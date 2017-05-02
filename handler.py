@@ -29,9 +29,11 @@ def reply(event, context):
     }
 
     reply_token = json.loads(event['body'])['events'][0]['replyToken']
+    text = json.loads(event['body'])['events'][0]['message']['text']
     print reply_token
+    print text
 
-    post_text(reply_token, "Hello World!")
+    post_text(reply_token, text)
 
     return response
 
