@@ -1,4 +1,10 @@
 
+# get start
+```
+npm install
+pip install -r requirements.txt
+aws configure
+```
 
 # テンプレートの作成
 ```
