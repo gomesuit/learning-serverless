@@ -1,6 +1,6 @@
 import json
-
-import linebot
+import os
+import requests
 
 def hello(event, context):
     body = {
@@ -37,10 +37,11 @@ def reply(event, context):
 
 def post_text(reply_token, text):
     REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
+    ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
     header = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer XXXXXXXXXXXXXXXX"
+        "Authorization": "Bearer %s" % ACCESS_TOKEN
     }
 
     payload = {
@@ -53,4 +54,5 @@ def post_text(reply_token, text):
             ]
     }
 
-    # requests.post(REPLY_ENDPOINT, headers=header, data=json.dumps(payload))
+    response = requests.post(REPLY_ENDPOINT, headers=header, data=json.dumps(payload))
+    print response.text

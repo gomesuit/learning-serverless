@@ -4,6 +4,7 @@
 npm install
 pip install -r requirements.txt
 aws configure
+export ACCESS_TOKEN=XXXXXXXXXXXXXX
 ```
 
 # テンプレートの作成
