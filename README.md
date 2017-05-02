@@ -8,7 +8,7 @@ aws configure
 
 # テンプレートの作成
 ```
-sls create --template aws-nodejs --name hello
+./node_modules/.bin/sls create --template aws-nodejs --name hello
 ```
 
 # デプロイ
