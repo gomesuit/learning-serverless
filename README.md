@@ -3,7 +3,14 @@
 ```
 npm install
 pip install -r requirements.txt
+pip install -g serverless
+# aws アクセスキー設定
 aws configure
+```
+
+# 環境変数の設定
+```
+# line bot アクセストークン
 export ACCESS_TOKEN=XXXXXXXXXXXXXX
 ```
 
