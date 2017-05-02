@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gomesuit/larning-serverless#readme",
   "dependencies": {
-    "serverless": "^1.12.1"
+    "serverless": "^1.12.1",
+    "serverless-python-requirements": "^2.1.2"
   }
 }

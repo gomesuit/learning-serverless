@@ -1,5 +1,7 @@
 import json
 
+import linebot
+
 def hello(event, context):
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
@@ -13,15 +15,9 @@ def hello(event, context):
 
     return response
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
-
 def reply(event, context):
+    print event
+
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
@@ -32,12 +28,29 @@ def reply(event, context):
         "body": json.dumps(body)
     }
 
+    reply_token = json.loads(event['body'])['events'][0]['replyToken']
+    print reply_token
+
+    post_text(reply_token, "Hello World!")
+
     return response
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
+def post_text(reply_token, text):
+    REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
+
+    header = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer XXXXXXXXXXXXXXXX"
     }
-    """
+
+    payload = {
+          "replyToken":reply_token,
+          "messages":[
+                {
+                    "type":"text",
+                    "text": text
+                }
+            ]
+    }
+
+    # requests.post(REPLY_ENDPOINT, headers=header, data=json.dumps(payload))
