@@ -5,7 +5,6 @@ pyenv install $(cat .python-version)
 nodebrew install-binary v7.10.0
 npm install
 pip install -r requirements.txt
-pip install -g serverless
 # aws アクセスキー設定
 aws configure
 ```
@@ -14,11 +13,6 @@ aws configure
 ```
 # line bot アクセストークン
 export ACCESS_TOKEN=XXXXXXXXXXXXXX
-```
-
-# テンプレートの作成
-```
-./node_modules/.bin/sls create --template aws-nodejs --name hello
 ```
 
 # デプロイ
