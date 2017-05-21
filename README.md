@@ -1,6 +1,8 @@
 
 # getting started
 ```
+pyenv install $(cat .python-version)
+nodebrew install-binary v7.10.0
 npm install
 pip install -r requirements.txt
 pip install -g serverless
