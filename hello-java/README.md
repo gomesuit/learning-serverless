@@ -1,3 +1,9 @@
+# build
+
+```
+mvn package shade:shade
+```
+
 # デプロイ
 ```
 sls deploy -v
