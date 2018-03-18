@@ -1,7 +1,6 @@
 
 # serverlessのインストール
 ```
-nodebrew install-binary v7.10.0
 npm install -g serverless
 ```
 
