@@ -1,0 +1,19 @@
+# デプロイ
+```
+sls deploy -v
+```
+
+# ローカル実行
+```
+sls invoke local -f hello
+```
+
+# 実行
+```
+sls invoke -f hello
+```
+
+# 削除
+```
+sls remove -v
+```
