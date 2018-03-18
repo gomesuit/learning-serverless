@@ -17,11 +17,14 @@ public class Handler implements RequestHandler<Map<String, Object>, String> {
 
 	private static final Logger LOG = Logger.getLogger(Handler.class);
 	private static final String BASE_URL = "https://ja.wikipedia.org/wiki/";
+	//private TwitterApi twitterApi;
 
 	@Override
 	public String handleRequest(Map<String, Object> input, Context context) {
 		LOG.info("received: " + input);
 		try {
+			//twitterApi.tweet("test");
+			System.out.println(System.getenv("variable1"));
 			return getContent("Template:今日は何の日");
 		} catch (Exception e) {
 			return "error";
