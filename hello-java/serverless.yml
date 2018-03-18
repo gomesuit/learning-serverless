@@ -6,6 +6,7 @@ provider:
   region: ap-northeast-1
   environment:
     variable1: value1
+    user: ${env:USER}
 
 # you can overwrite defaults here
 #  stage: dev

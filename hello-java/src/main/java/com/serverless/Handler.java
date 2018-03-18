@@ -25,6 +25,7 @@ public class Handler implements RequestHandler<Map<String, Object>, String> {
 		try {
 			//twitterApi.tweet("test");
 			System.out.println(System.getenv("variable1"));
+			System.out.println(System.getenv("user"));
 			return getContent("Template:今日は何の日");
 		} catch (Exception e) {
 			return "error";
