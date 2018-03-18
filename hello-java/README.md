@@ -19,6 +19,11 @@ sls invoke local -f hello
 sls invoke -f hello
 ```
 
+# ログ
+```
+sls logs -f hello -t
+```
+
 # 削除
 ```
 sls remove -v
