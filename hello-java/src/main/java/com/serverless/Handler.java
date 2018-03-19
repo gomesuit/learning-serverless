@@ -10,6 +10,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
@@ -17,17 +20,18 @@ public class Handler implements RequestHandler<Map<String, Object>, String> {
 
 	private static final Logger LOG = Logger.getLogger(Handler.class);
 	private static final String BASE_URL = "https://ja.wikipedia.org/wiki/";
-	//private TwitterApi twitterApi;
 
 	@Override
 	public String handleRequest(Map<String, Object> input, Context context) {
 		LOG.info("received: " + input);
+		Twitter twitter = new TwitterFactory().getInstance();
 		try {
-			//twitterApi.tweet("test");
+			twitter.updateStatus("test");
 			System.out.println(System.getenv("variable1"));
-			System.out.println(System.getenv("user"));
+			System.out.println(System.getenv("twitter4j.debug"));
 			return getContent("Template:今日は何の日");
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "error";
 		}
 	}
