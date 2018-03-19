@@ -5,8 +5,6 @@ provider:
   runtime: java8
   region: ap-northeast-1
   environment:
-    variable1: value1
-    user: ${env:USER}
     TWITTER4J_DEBUG: ${env:TWITTER4J_DEBUG}
     TWITTER4J_OAUTH_CONSUMERKEY: ${env:TWITTER4J_OAUTH_CONSUMERKEY}
     TWITTER4J_OAUTH_CONSUMERSECRET: ${env:TWITTER4J_OAUTH_CONSUMERSECRET}
