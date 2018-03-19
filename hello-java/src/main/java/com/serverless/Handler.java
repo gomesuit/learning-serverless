@@ -17,6 +17,7 @@ import org.jsoup.select.Elements;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
 import twitter4j.TwitterException;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -31,8 +32,6 @@ public class Handler implements RequestHandler<Map<String, Object>, String> {
 	public String handleRequest(Map<String, Object> input, Context context) {
 		LOG.info("received: " + input);
 		try {
-			System.out.println(System.getenv("variable1"));
-			System.out.println(System.getenv("twitter4j.debug"));
 			whatDay("Template:今日は何の日", "");
 			return getContent("Template:今日は何の日");
 		} catch (Exception e) {
@@ -95,9 +94,18 @@ public class Handler implements RequestHandler<Map<String, Object>, String> {
 
 		while (!stack.empty()) {
 			String tweetContent = stack.pop();
-	        Twitter twitter = new TwitterFactory().getInstance();
+			AccessToken accessToken = loadAccessToken();
+			Twitter twitter = new TwitterFactory().getInstance();
+			twitter.setOAuthConsumer(System.getenv("TWITTER4J_OAUTH_CONSUMERKEY"), System.getenv("TWITTER4J_OAUTH_CONSUMERSECRET"));
+			twitter.setOAuthAccessToken(accessToken);
 			twitter.updateStatus(tweetContent);
 		}
+	}
+
+	private static AccessToken loadAccessToken(){
+		String token = System.getenv("TWITTER4J_OAUTH_ACCESSTOKEN");
+		String tokenSecret = System.getenv("TWITTER4J_OAUTH_ACCESSTOKENSECRET");
+		return new AccessToken(token, tokenSecret);
 	}
 
 	private Stack<String> createTweetContents(String content, String header) {

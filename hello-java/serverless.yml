@@ -7,11 +7,11 @@ provider:
   environment:
     variable1: value1
     user: ${env:USER}
-    twitter4j.debug: ${env:TWITTER4J_DEBUG}
-    twitter4j.oauth.consumerKey: ${env:TWITTER4J_OAUTH_CONSUMERKEY}
-    twitter4j.oauth.consumerSecret: ${env:TWITTER4J_OAUTH_CONSUMERSECRET}
-    twitter4j.oauth.accessToken: ${env:TWITTER4J_OAUTH_ACCESSTOKEN}
-    twitter4j.oauth.accessTokenSecret: ${env:TWITTER4J_OAUTH_ACCESSTOKENSECRET}
+    TWITTER4J_DEBUG: ${env:TWITTER4J_DEBUG}
+    TWITTER4J_OAUTH_CONSUMERKEY: ${env:TWITTER4J_OAUTH_CONSUMERKEY}
+    TWITTER4J_OAUTH_CONSUMERSECRET: ${env:TWITTER4J_OAUTH_CONSUMERSECRET}
+    TWITTER4J_OAUTH_ACCESSTOKEN: ${env:TWITTER4J_OAUTH_ACCESSTOKEN}
+    TWITTER4J_OAUTH_ACCESSTOKENSECRET: ${env:TWITTER4J_OAUTH_ACCESSTOKENSECRET}
 
 # you can overwrite defaults here
 #  stage: dev
