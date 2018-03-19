@@ -11,12 +11,12 @@ sls deploy -v
 
 # ローカル実行
 ```
-sls invoke local -f hello --data '{"keyword":"Template:今日は何の日", "header":""}'
+sls invoke local -f hello -p event.json
 ```
 
 # 実行
 ```
-sls invoke -f hello --data '{"keyword":"Template:今日は何の日", "header":""}'
+sls invoke -f hello -p event.json
 ```
 
 # ログ
