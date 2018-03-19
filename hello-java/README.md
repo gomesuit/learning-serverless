@@ -11,12 +11,12 @@ sls deploy -v
 
 # ローカル実行
 ```
-sls invoke local -f hello -p event.json
+sls invoke local -f hello
 ```
 
 # 実行
 ```
-sls invoke -f hello -p event.json
+sls invoke -f hello
 ```
 
 # ログ
