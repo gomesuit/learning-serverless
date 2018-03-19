@@ -11,17 +11,17 @@ sls deploy -v
 
 # ローカル実行
 ```
-sls invoke local -f hello
+sls invoke local -f default
 ```
 
 # 実行
 ```
-sls invoke -f hello
+sls invoke -f default
 ```
 
 # ログ
 ```
-sls logs -f hello -t
+sls logs -f default -t
 ```
 
 # 削除
