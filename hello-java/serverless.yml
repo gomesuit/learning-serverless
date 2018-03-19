@@ -35,13 +35,34 @@ package:
   artifact: target/hello-dev.jar
 
 functions:
-  hello:
+  default:
     handler: com.serverless.Handler
     events:
-      - schedule: cron(0 1 * * ? *)
+      - schedule: cron(0 23 * * ? *)
     environment:
       KEYWORD: Template:今日は何の日
       HEADER: ''
+  disaster:
+    handler: com.serverless.Handler
+    events:
+      - schedule: cron(0 3 * * ? *)
+    environment:
+      KEYWORD: Portal:災害/今日は何の日
+      HEADER: 災害
+  literature:
+    handler: com.serverless.Handler
+    events:
+      - schedule: cron(0 7 * * ? *)
+    environment:
+      KEYWORD: Portal:文学/今日は何の日
+      HEADER: 文学
+  sports:
+    handler: com.serverless.Handler
+    events:
+      - schedule: cron(0 11 * * ? *)
+    environment:
+      KEYWORD: Portal:スポーツ/今日は何の日
+      HEADER: スポーツ
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
