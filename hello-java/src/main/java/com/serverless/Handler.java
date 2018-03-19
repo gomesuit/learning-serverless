@@ -30,10 +30,13 @@ public class Handler implements RequestHandler<Map<String, Object>, String> {
 
 	@Override
 	public String handleRequest(Map<String, Object> input, Context context) {
-		LOG.info("received: " + input);
+		System.out.println(input.get("keyword"));
+		System.out.println(input.get("header"));
 		try {
-			whatDay("Template:今日は何の日", "");
-			return getContent("Template:今日は何の日");
+			String keyword = input.get("keyword").toString();
+			String header = input.get("header").toString();
+			whatDay(keyword, header);
+			return "finish";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
