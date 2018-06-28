@@ -1,10 +1,10 @@
 
 # serverlessのインストール
 ```
-yarn install
+npm install -g serverless
 ```
 
 # テンプレートの作成
 ```
-yarn run sls create --template aws-nodejs --name hello
+sls create --template aws-nodejs --name hello
 ```
