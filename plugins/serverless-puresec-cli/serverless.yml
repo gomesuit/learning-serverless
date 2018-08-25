@@ -11,6 +11,10 @@ provider:
 functions:
   hello:
     handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
 
 plugins:
   - serverless-puresec-cli
