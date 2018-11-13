@@ -1,0 +1,151 @@
+---
+service: sqs
+
+frameworkVersion: ">=1.30.0"
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: ap-northeast-1
+  stage: dev
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: post
+
+resources:
+  Resources:
+    SQSQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "${self:service}-${opt:stage, self:provider.stage}-message"
+        ReceiveMessageWaitTimeSeconds: 20
+
+    APIResourceSend:
+      Type: "AWS::ApiGateway::Resource"
+      DependsOn: "SQSQueue"
+      Properties:
+        ParentId:
+          Fn::GetAtt:
+            - "ApiGatewayRestApi"
+            - "RootResourceId"
+        PathPart: "send"
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+
+    SQSAPIMethod:
+      Type: "AWS::ApiGateway::Method"
+      DependsOn: "SQSQueue"
+      Properties:
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+        ResourceId:
+          Ref: "APIResourceSend"
+        HttpMethod: "POST"
+        ApiKeyRequired: false
+        MethodResponses:
+          -
+            StatusCode: "200"
+            ResponseParameters:
+              "method.response.header.Access-Control-Allow-Origin": true
+        AuthorizationType: "NONE"
+        Integration:
+          Type: "AWS"
+          Credentials:
+            Fn::GetAtt: ["APIGatewaySQSIAM", "Arn"]
+          RequestParameters:
+            'integration.request.querystring.Action': "'SendMessage'"
+            'integration.request.querystring.MessageBody': "method.request.body.message"
+          IntegrationHttpMethod: POST
+          RequestTemplates:
+            "application/json": "{statusCode:200}"
+          IntegrationResponses:
+            -
+              StatusCode: "200"
+              ResponseParameters:
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              ResponseTemplates:
+                "application/json": ""
+          Uri:
+            'Fn::Join':
+              - ':'
+              -
+                - 'arn:aws:apigateway'
+                - Ref: 'AWS::Region'
+                - 'Fn::Join':
+                    - '/'
+                    -
+                      - 'sqs:path/'
+                      - Ref: 'AWS::AccountId'
+                      - Fn::GetAtt: ["SQSQueue", "QueueName"]
+
+    # for CORS
+    SQSAPIMethodMock:
+      Type: "AWS::ApiGateway::Method"
+      DependsOn: "SQSQueue"
+      Properties:
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+        ResourceId:
+          Ref: "APIResourceSend"
+        HttpMethod: "OPTIONS"
+        ApiKeyRequired: false
+        MethodResponses:
+          -
+            StatusCode: "200"
+            ResponseParameters:
+              "method.response.header.Access-Control-Allow-Origin": true
+              "method.response.header.Access-Control-Allow-Headers": true
+              "method.response.header.Access-Control-Allow-Methods": true
+              "method.response.header.Access-Control-Allow-Credentials": true
+        AuthorizationType: "NONE"
+        Integration:
+          Type: "MOCK"
+          RequestTemplates:
+            "application/json": "{statusCode:200}"
+          Credentials:
+            Fn::GetAtt: ["APIGatewaySQSIAM", "Arn"]
+          IntegrationResponses:
+            -
+              StatusCode: "200"
+              ResponseParameters:
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,x-api-token,authorizationtoken,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              ResponseTemplates:
+                "application/json": ""
+
+    APIGatewaySQSIAM:
+      Type: "AWS::IAM::Role"
+      Properties:
+        Path: "/app/${self:service}/"
+        RoleName: "${self:service}-${opt:stage, self:provider.stage}-apigw"
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service:
+                  - "apigateway.amazonaws.com"
+              Action: "sts:AssumeRole"
+        Policies:
+          - PolicyName: "${self:service}-${opt:stage, self:provider.stage}-apigw-sqsfullaccess"
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: "Allow"
+                  Resource: "*"
+                  Action:
+                    - "logs:CreateLogGroup"
+                    - "logs:CreateLogStream"
+                    - "logs:PutLogEvents"
+                - Effect: "Allow"
+                  Resource:
+                    - "*"
+                  Action:
+                    - "sqs:SendMessage"
