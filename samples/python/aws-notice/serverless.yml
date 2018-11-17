@@ -1,0 +1,12 @@
+---
+service: aws-notice
+
+frameworkVersion: ">=1.30.0"
+
+provider:
+  name: aws
+  runtime: python3.6
+
+functions:
+  hello:
+    handler: handler.hello
