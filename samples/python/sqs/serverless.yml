@@ -10,12 +10,18 @@ provider:
   stage: dev
 
 functions:
+  send:
+    handler: handler.hello
+    events:
+      - http:
+          path: helloo
+          method: post
   hello:
     handler: handler.hello
     events:
       - http:
           path: hello
-          method: post
+          method: get
 
 resources:
   Resources:
