@@ -10,17 +10,11 @@ provider:
   stage: dev
 
 functions:
-  send:
-    handler: handler.hello
+  mock:
+    handler: handler.mock
     events:
       - http:
-          path: helloo
-          method: post
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
+          path: mock
           method: get
 
 resources:
