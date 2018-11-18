@@ -12,9 +12,11 @@ SLACK_CHANNEL = os.environ['SLACK_CHANNEL']
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-
 def send_slack(slack_message):
     req = Request(SLACK_HOOK_URL, json.dumps(slack_message).encode('utf-8'))
+
+    logger.info(json.dumps((slack_message)))
+    return
 
     try:
         response = urlopen(req)
