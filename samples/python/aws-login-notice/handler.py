@@ -1,7 +1,7 @@
 import boto3
 import logging
 import os
-import send_slack
+from lib import send_slack
 
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
