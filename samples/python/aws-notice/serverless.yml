@@ -20,8 +20,6 @@ functions:
       - cloudwatchEvent:
         event:
           source:
-            - "aws.cloudtrail"
+            - "aws.signin"
           detail-type:
-            - "AWS API Call via CloudTrail"
-          detail:
-            eventName: "ConsoleLogin"
+            - "AWS Console Sign In via CloudTrail"
