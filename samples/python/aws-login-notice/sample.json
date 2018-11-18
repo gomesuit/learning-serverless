@@ -1,0 +1,27 @@
+{
+    "eventVersion": "1.05",
+    "userIdentity": {
+        "type": "Root",
+        "principalId": "99722",
+        "arn": "arn:aws:iam::99722:root",
+        "accountId": "997222"
+    },
+    "eventTime": "2018-11-18T04:41:03Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "1.1.1.1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
+    "requestParameters": null,
+    "responseElements": {
+        "ConsoleLogin": "Success"
+    },
+    "additionalEventData": {
+        "LoginTo": "https://console.aws.amazon.com/console/home",
+        "MobileVersion": "No",
+        "MFAUsed": "No"
+    },
+    "eventID": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "eventType": "AwsConsoleSignIn",
+    "recipientAccountId": "9999999999999999"
+}
