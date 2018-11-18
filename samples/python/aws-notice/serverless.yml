@@ -18,11 +18,10 @@ functions:
     handler: handler.login
     events:
       - cloudwatchEvent:
-          event:
-            source:
-              - "aws.ec2"
-            detail-type:
-              - "EC2 Instance State-change Notification"
-            detail:
-              state:
-                - pending
+        event:
+          source:
+            - "aws.cloudtrail"
+          detail-type:
+            - "AWS API Call via CloudTrail"
+          detail:
+            eventName: "ConsoleLogin"
