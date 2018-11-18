@@ -1,5 +1,5 @@
 ---
-service: aws-notice
+service: aws-login-notice
 
 frameworkVersion: ">=1.30.0"
 
@@ -12,8 +12,6 @@ provider:
     SLACK_CHANNEL: aws-notice
 
 functions:
-  hello:
-    handler: handler.hello
   login:
     handler: handler.login
     events:
