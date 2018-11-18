@@ -18,8 +18,8 @@ functions:
     handler: handler.login
     events:
       - cloudwatchEvent:
-        event:
-          source:
-            - "aws.signin"
-          detail-type:
-            - "AWS Console Sign In via CloudTrail"
+          event:
+            source:
+              - "aws.signin"
+            detail-type:
+              - "AWS Console Sign In via CloudTrail"
