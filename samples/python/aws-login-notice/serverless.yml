@@ -21,3 +21,13 @@ functions:
               - "AWS Console Sign In via CloudTrail"
   role:
     handler: handler.role
+    events:
+      - cloudwatchEvent:
+          event:
+            source:
+              - "aws.cloudtrail"
+            detail-type:
+              - "AWS API Call via CloudTrail"
+            detail:
+              eventSource:
+                - "cloudtrail.amazonaws.com"
