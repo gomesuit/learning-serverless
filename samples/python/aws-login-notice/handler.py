@@ -1,7 +1,7 @@
 import boto3
 import logging
 import os
-from lib import send_slack
+from lib import slack
 
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -20,16 +20,16 @@ def login(event, context):
     additonal_event_data = detail['additionalEventData']
 
     attachments = [
-        send_slack.build_attachment('アカウント', user_identity['arn']),
-        send_slack.build_attachment('ログイン時刻', detail['eventTime']),
-        send_slack.build_attachment('IP', detail['sourceIPAddress']),
-        send_slack.build_attachment('ユーザエージェント', detail['userAgent']),
-        send_slack.build_attachment('MFA利用', additonal_event_data['MFAUsed']),
+        slack.build_attachment('アカウント', user_identity['arn']),
+        slack.build_attachment('ログイン時刻', detail['eventTime']),
+        slack.build_attachment('IP', detail['sourceIPAddress']),
+        slack.build_attachment('ユーザエージェント', detail['userAgent']),
+        slack.build_attachment('MFA利用', additonal_event_data['MFAUsed']),
     ]
 
     title = 'AWSコンソールログイン通知'
 
-    send_slack.send_slack(
+    slack.send(
         SLACK_HOOK_URL,
         SLACK_CHANNEL,
         title,
