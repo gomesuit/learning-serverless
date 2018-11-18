@@ -6,7 +6,11 @@ frameworkVersion: ">=1.30.0"
 provider:
   name: aws
   runtime: python3.6
+  region: ap-northeast-1
 
 functions:
   hello:
     handler: handler.hello
+    environment:
+      SLACK_HOOK_URL: ${ssm:/larning-serverless/aws-notice/SLACK_HOOK_URL}
+      SLACK_CHANNEL: aws-notice
