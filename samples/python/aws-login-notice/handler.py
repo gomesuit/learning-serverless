@@ -13,12 +13,14 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def login(event, context):
+    logger.info(str(event))
     slack_message = {
         'channel': SLACK_CHANNEL,
         'text': "login"
     }
 
     req = Request(SLACK_HOOK_URL, json.dumps(slack_message).encode('utf-8'))
+
     try:
         response = urlopen(req)
         response.read()
