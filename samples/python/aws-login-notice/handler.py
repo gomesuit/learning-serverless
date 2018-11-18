@@ -41,13 +41,21 @@ def login(event, context):
     logger.info(str(event))
 
     detail = event['detail']
+    user_identity = detail['userIdentity']
+    additonal_event_data = detail['additionalEventData']
+
+    attachments = [
+        build_attachment('アカウント', user_identity['arn']),
+        build_attachment('ログイン時刻', detail['eventTime']),
+        build_attachment('IP', detail['sourceIPAddress']),
+        build_attachment('ユーザエージェント', detail['userAgent']),
+        build_attachment('MFA利用', additonal_event_data['MFAUsed']),
+    ]
 
     slack_message = {
         'channel': SLACK_CHANNEL,
         'text': 'AWSコンソールログイン通知',
-        'attachments':[
-            build_attachment('attachment01', 'This is')
-        ]
+        'attachments': attachments
     }
 
     send_slack(slack_message)
