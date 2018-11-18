@@ -35,3 +35,18 @@ def login(event, context):
         title,
         attachments
     )
+
+def role(event, context):
+    logger.info(str(event))
+
+    attachments = [
+    ]
+
+    title = '通知'
+
+    slack.send(
+        SLACK_HOOK_URL,
+        SLACK_CHANNEL,
+        title,
+        attachments
+    )
