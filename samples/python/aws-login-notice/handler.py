@@ -16,7 +16,7 @@ def send_slack(slack_message):
     req = Request(SLACK_HOOK_URL, json.dumps(slack_message).encode('utf-8'))
 
     logger.info(json.dumps((slack_message)))
-    return
+    # return
 
     try:
         response = urlopen(req)
@@ -27,12 +27,27 @@ def send_slack(slack_message):
     except URLError as e:
         logger.error("Server connection failed: %s", e.reason)
 
+def build_attachment(title, value):
+    return {
+        "fields":[
+            {
+                "title": title,
+                "value": value
+            }
+        ]
+    }
+
 def login(event, context):
     logger.info(str(event))
 
+    detail = event['detail']
+
     slack_message = {
         'channel': SLACK_CHANNEL,
-        'text': "login"
+        'text': 'AWSコンソールログイン通知',
+        'attachments':[
+            build_attachment('attachment01', 'This is')
+        ]
     }
 
     send_slack(slack_message)
