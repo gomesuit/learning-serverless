@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 
 SLACK_CHANNEL = os.environ['SLACK_CHANNEL']
+SLACK_HOOK_URL = os.environ['SLACK_HOOK_URL']
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -26,10 +27,11 @@ def login(event, context):
         send_slack.build_attachment('MFA利用', additonal_event_data['MFAUsed']),
     ]
 
-    slack_message = {
-        'channel': SLACK_CHANNEL,
-        'text': 'AWSコンソールログイン通知',
-        'attachments': attachments
-    }
+    title = 'AWSコンソールログイン通知'
 
-    send_slack.send_slack(slack_message)
+    send_slack.send_slack(
+        SLACK_HOOK_URL,
+        SLACK_CHANNEL,
+        title,
+        attachments
+    )
