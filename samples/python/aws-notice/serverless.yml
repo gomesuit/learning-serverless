@@ -6,7 +6,7 @@ frameworkVersion: ">=1.30.0"
 provider:
   name: aws
   runtime: python3.6
-  region: ap-northeast-1
+  region: us-east-1
   environment:
     SLACK_HOOK_URL: ${ssm:/larning-serverless/aws-notice/SLACK_HOOK_URL}
     SLACK_CHANNEL: aws-notice
@@ -19,7 +19,5 @@ functions:
     events:
       - cloudwatchEvent:
           event:
-            source:
-              - "aws.signin"
             detail-type:
               - "AWS Console Sign In via CloudTrail"
