@@ -3,6 +3,6 @@ require 'json'
 def hello(event:, context:)
   {
     statusCode: 200,
-    body: JSON.generate(event)
+    body: JSON.pretty_generate(event)
   }
 end
