@@ -11,10 +11,19 @@ provider:
   stage: dev
   region: ap-northeast-1
 
+custom:
+  customDomain:
+    domainName: api.gomesuit.me
+    certificateName: '*.gomesuit.me'
+    endpointType: 'regional'
+
 functions:
   hello:
     handler: handler.hello
     events:
       - http:
-          path: users/create
+          path: /
           method: get
+
+plugins:
+  - serverless-domain-manager
