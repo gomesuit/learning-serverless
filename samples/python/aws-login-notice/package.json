@@ -1,0 +1,18 @@
+{
+  "name": "aws-login-notice",
+  "version": "1.0.0",
+  "description": "- https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/events/EventTypes.html#console_event_type",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "serverless": "^2.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

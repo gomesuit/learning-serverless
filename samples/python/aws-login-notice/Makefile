@@ -1,5 +1,11 @@
-login:
-	pipenv run sls invoke local -f login --path sample.json
+deploy:
+	nodenv exec npx pipenv run sls deploy -v
 
-role:
-	pipenv run sls invoke local -f role
+remove:
+	nodenv exec npx pipenv run sls remove -v
+
+login-test:
+	nodenv exec npx pipenv run sls invoke local -f login --path sample.json
+
+role-test:
+	nodenv exec npx pipenv run sls invoke local -f role
