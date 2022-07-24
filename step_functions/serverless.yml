@@ -21,9 +21,9 @@ stepFunctions:
           First function:
             Type: Task
             Resource: !GetAtt firstFunction.Arn
-            OutputPath: "$.Payload"
-            Parameters:
-              Payload.$: "$"
+            OutputPath: "$.message"
+            # Parameters:
+            #   Payload.$: "$"
             Retry:
             - ErrorEquals:
               - Lambda.ServiceException
@@ -40,9 +40,9 @@ stepFunctions:
           Second function:
             Type: Task
             Resource: !GetAtt secondFunction.Arn
-            OutputPath: "$.Payload"
-            Parameters:
-              Payload.$: "$"
+            OutputPath: "$.message"
+            # Parameters:
+            #   Payload.$: "$"
             Retry:
             - ErrorEquals:
               - Lambda.ServiceException
