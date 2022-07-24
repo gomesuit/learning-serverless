@@ -1,10 +1,7 @@
+# how to install serverless framework
 
-# serverlessのインストール
-```
-npm install -g serverless
-```
+https://www.serverless.com/framework/docs/getting-started
 
-# テンプレートの作成
-```
-sls create --template aws-nodejs --name hello
-```
+# tutorial
+
+https://www.serverless.com/framework/docs/tutorial
