@@ -2,11 +2,59 @@ service: step-functions
 
 frameworkVersion: '3'
 
+plugins:
+  - serverless-step-functions
+
 provider:
   name: aws
   runtime: python3.8
   region: ap-northeast-1
 
+stepFunctions:
+  stateMachines:
+    myStateMachine:
+      name: MyStateMachine
+      definition:
+        Comment: This is your state machine
+        StartAt: First function
+        States:
+          First function:
+            Type: Task
+            Resource: !GetAtt firstFunction.Arn
+            OutputPath: "$.Payload"
+            Parameters:
+              Payload.$: "$"
+            Retry:
+            - ErrorEquals:
+              - Lambda.ServiceException
+              - Lambda.AWSLambdaException
+              - Lambda.SdkClientException
+              IntervalSeconds: 2
+              MaxAttempts: 6
+              BackoffRate: 2
+            Next: Wait
+          Wait:
+            Type: Wait
+            Seconds: 5
+            Next: Second function
+          Second function:
+            Type: Task
+            Resource: !GetAtt secondFunction.Arn
+            OutputPath: "$.Payload"
+            Parameters:
+              Payload.$: "$"
+            Retry:
+            - ErrorEquals:
+              - Lambda.ServiceException
+              - Lambda.AWSLambdaException
+              - Lambda.SdkClientException
+              IntervalSeconds: 2
+              MaxAttempts: 6
+              BackoffRate: 2
+            End: true
+
 functions:
   firstFunction:
+    handler: handler.hello
+  secondFunction:
     handler: handler.hello
