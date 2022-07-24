@@ -1,0 +1,12 @@
+service: step-functions
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-northeast-1
+
+functions:
+  hello:
+    handler: handler.hello
