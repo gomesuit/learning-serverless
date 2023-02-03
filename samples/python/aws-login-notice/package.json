@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "serverless": "^2.15.0"
+    "serverless": "^2.72.3"
   },
   "devDependencies": {},
   "scripts": {
